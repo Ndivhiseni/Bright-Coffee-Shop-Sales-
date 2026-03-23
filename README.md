@@ -3,15 +3,15 @@ Analysis for the CEO to understand the sales at Bright coffee shop for the last 
 
 
 ### problem statement 
-the sales at the shop have been declining in the past 6 months and the ceo want to understand the cause of the decline in sales 
-i am tasked to do diagnostic analysis to understand the decline in revenue
+The sales at the shop have been declining in the past 6 months and the ceo want to understand the cause of the decline in sales 
+I am tasked to do diagnostic analysis to understand the decline in revenue
 
 ### AIM
-the aim of this project is to provide detailed insights on what cause the decline in revenue 
+The aim of this project is to provide detailed insights on what cause the decline in revenue 
 
 ### Objectives
 
-in order  to achieve the aim, the following objectives must be met:
+In order  to achieve the aim, the following objectives must be met:
 - use miro for brainstorming
 - use canva for project planning
 - use databricks for data processing
