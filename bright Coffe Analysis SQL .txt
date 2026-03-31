@@ -1,0 +1,46 @@
+SELECT
+-- dates
+       transaction_date,
+       Dayname(transaction_date) AS Day_name,
+       Monthname(transaction_date) AS Month_name,
+       date_format (transaction_time, 'HH:mm:ss' ) AS purchase_time,
+       CASE 
+            WHEN Day_name IN ('Sun', 'Sat') THEN 'Weekend'
+            ELSE 'Weekday'
+            END AS day_classification,
+       CASE 
+            WHEN  date_format (transaction_time, 'HH:mm:ss' ) BETWEEN '00:00:00' AND '11:59:59' THEN 'Morning' 
+            WHEN  date_format (transaction_time, 'HH:mm:ss' ) BETWEEN  '12:00:00' AND '16:59:59' THEN 'Afternoon'
+            WHEN  date_format (transaction_time, 'HH:mm:ss' ) >= '17:00:00' THEN 'Evening'
+            
+            END AS time_bucket,
+-- counts id's
+       COUNT( DISTINCT transaction_id) AS num_sales,
+       COUNT(DISTINCT product_id) AS num__products,
+       COUNT(DISTINCT store_id) AS num_stores,
+-- Revenue
+       SUM(unit_price * transaction_qty) AS revenue_per_tnx,
+
+       CASE
+           WHEN revenue_per_tnx <= 50 THEN 'low spend'
+           WHEN revenue_per_tnx BETWEEN 50 AND 100 THEN 'medium spend'
+           ELSE 'high spend'
+
+           END AS revenue_bucket,
+           
+-- categorical columns
+   store_location,
+   product_category,
+   product_type,
+   product_detail
+
+FROM `workspace`.`default`.`bright_coffee_shop_analysis`
+GROUP BY transaction_date,
+         Day_name,               
+         Month_name,
+         store_location,
+         product_category,
+         product_detail,
+         purchase_time,
+         product_type,
+         time_bucket;
